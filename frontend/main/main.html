@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить продукт</title>
+    <link rel="stylesheet" href="/frontend/main/main.css">
+    <style>
+        /* CSS для модального окна */
+        .modal {
+            display: flex; 
+            justify-content: center;/* Скрыто по умолчанию */
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px; 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 47%; 
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <header>
+            <div class="logo">DeadLove</div>
+            <div class="content">
+                <input type="text" id="searchInput" class="search-input" placeholder="Поиск...">
+                <button id="searchButton">Поиск</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/frontend/news/news.html">Новости</a></li>
+                    <li><a href="/frontend/aboutUs/aboutUs.html">Контакты</a></li>
+                    <li><a href="#"><button id="addProductBtn">Добавить продукт</button></a></li>
+                    <li><a href="#">Адрес</a></li>
+                    <li><a href="#"><button id="open-cart">Корзина</button></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>Список продуктов</h1> 
+
+            <div id="product-list" class="product-list"></div>
+        </main>
+        <footer>
+            <p>© 2024 DeadLove. Все права защищены.</p>
+        </footer>
+    </div>
+
+
+    <!-- Модальное окно для добавления продукта -->
+    <div id="productModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Добавить новый продукт</h2>
+            <form id="productForm" enctype="multipart/form-data">
+                <input type="text" name="name" placeholder="Название продукта и описание" required><br>
+                <input type="number" step="0.01" name="price" placeholder="Цена" required><br>
+                <input type="file" name="image" accept="image/*" required><br>
+                <button type="submit">Добавить продукт</button>
+            </form>
+        </div>
+    </div>
+
+
+<!-- Модальное окно -->
+<div id="myModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Корзина</h2>
+        <div id="cart-items"></div>
+        <button id="order-button">Заказать</button>
+
+    <div id="order-form" style="display: none;">
+        <h2>Введите данные для заказа</h2>
+        <input type="text" id="name" placeholder="Имя" required>
+        <input type="text" id="address" placeholder="Адрес" required>
+        <input type="text" id="phone" placeholder="Номер телефона" required>
+        <button id="pay-button">Оплатить</button>
+    </div>
+</div>
+</div>
+
+
+
+
+
+    <script src="/frontend/main/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/frontend/js/particles.js"></script>
+
+    <script>
+        // JavaScript для модального окна
+        var modal = document.getElementById("productModal");
+        var btn = document.getElementById("addProductBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        // Открыть модальное окно при нажатии кнопки
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Закрыть модальное окно при нажатии на (x)
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Закрыть модальное окно при нажатии в любом месте вне модального окна
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+    </script>
+</body>
+</html>

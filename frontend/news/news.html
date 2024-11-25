@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>news</title>
+    <link rel="stylesheet" href="/frontend/news/news.css">
+    
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <header>
+            <div class="logo">DeadLove</div>
+            <div class="content">
+                <input type="text" id="searchInput" class="search-input" placeholder="Поиск...">
+                <button id="searchButton">Поиск</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/frontend/main/main.html">Каталог</a></li>
+                    <li><a href="/frontend/aboutUs/aboutUs.html">Контакты</a></li>
+                    <li><a href="#"><button id="addProductBtn">Добавить новость</button></a></li>
+                    <li><a href="#">Адрес</a></li>
+                    <li><a href="#"><button id="open-cart">Корзина</button></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>Новости</h1>
+
+            <div id="product-list" class="product-list"></div>
+            <!-- <button>Добавить новость</button> -->
+
+
+            <h2>Добавить новость</h2>
+            <form id="productForm" enctype="multipart/form-data">
+                <input type="text" name="name" placeholder="Название продукта и описание" required><br>
+                <input type="text" step="0.01" name="description" placeholder="описание" required><br>
+                <input type="file" name="image" accept="image/*" required><br>
+                <button type="submit">Добавить новость</button>
+            </form>
+        </main>
+        <footer>
+            <p>© 2024 DeadLove. Все права защищены.</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/frontend/js/particles.js"></script>
+    <script src="/frontend/news/news.js"></script>
+</body>
+
+</html>

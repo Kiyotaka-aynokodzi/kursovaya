@@ -1,0 +1,88 @@
+body {
+    height: 100%; 
+    background-color: rgb(0, 0, 0); /* Черный фон для всей страницы */
+    margin: 0; /* Убираем отступы */
+    font-family: Arial, sans-serif; /* Шрифт по умолчанию */
+}
+
+h1 {
+    color: #ffffff;
+}
+
+.container {
+    position: absolute; /* Абсолютное позиционирование для центрирования */
+    top: 50%; /* Сдвигаем форму вниз на 50% высоты */
+    left: 50%; /* Сдвигаем форму вправо на 50% ширины */
+    transform: translate(-50%, -50%); /* Центрируем форму */
+}
+
+#register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9); /* Полупрозрачный белый цвет */
+    border-radius: 20px; /* Закругление углов */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Тень для эффекта */
+    backdrop-filter: blur(10px); /* Эффект размытия фона */
+    padding: 20px;
+    width: 600px;
+    height: 300px;
+}
+
+
+label {
+    margin-top: 15px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px; /* Здесь регулируется пространство между полями */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.signup {
+    width: 100%;
+    padding: 10px;
+    background-color: #6a009b;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup:hover {
+    background-color: #000000;
+}
+
+p {
+    text-align: center;
+    color:rgb(255, 255, 255);
+}
+
+a {
+    color: rgb(255, 255, 255);
+}
+
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9); /* Полупрозрачный белый цвет */
+    border-radius: 20px; /* Закругление углов */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Тень для эффекта */
+    backdrop-filter: blur(10px); /* Эффект размытия фона */
+    padding: 20px;
+    width: 600px;
+    height: 300px;
+}
+
+#message {
+    color: #ffffff;
+}

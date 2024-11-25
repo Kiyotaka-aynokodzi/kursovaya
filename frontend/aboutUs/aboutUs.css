@@ -1,0 +1,97 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%; 
+    background-color: rgb(0, 0, 0); /* Черный фон для всей страницы */
+    margin: 0; /* Убираем отступы */
+    font-family: Arial, sans-serif; /* Шрифт по умолчанию */
+}
+
+.container {
+    min-height: 100%; /* Задайте минимальную высоту 100% */
+    width: 1200px; /* Ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера */ /* Внутренние отступы */
+    background-color: #000000; /* Светлый фон контейнера */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    display: flex; /* Включите flexbox */
+    flex-direction: column; /* Установите направление для flexbox */
+    justify-content: space-between; /* Размещайте содержимое по вертикали */
+    color: white;
+    border: 3px solid rgb(255, 255, 255);
+}
+
+.zxc {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+}
+main {
+    margin-top: 20px; /* Отступ сверху */
+    flex-grow: 1; /* Позволяем основному контенту занимать оставшееся пространство */
+    padding: 20px;
+}
+
+form input {
+    display: block; /* Каждый элемент формы на новой строке */
+    margin: 10px 0; /* Отступы между элементами формы */
+    width: 100%; /* Ширина 100% от контейнера */
+    padding: 10px; /* Внутренние отступы */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.section1 {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.section2 {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+
+#particles-js {
+    position: fixed; /* Фиксированное положение */
+    width: 100%; /* Ширина 100% */
+    height: 100%; /* Высота 100% */
+    top: 0; /* Вверху */
+    left: 0; /* Слева */
+    z-index: -1; /* На заднем плане */
+}
+
+
+
