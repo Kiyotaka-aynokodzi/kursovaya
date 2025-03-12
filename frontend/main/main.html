@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить продукт</title>
+    <title>Главная страница</title>
     <link rel="stylesheet" href="/frontend/main/main.css">
     <style>
         /* CSS для модального окна */
         .modal {
-            display: flex; 
-            justify-content: center;/* Скрыто по умолчанию */
-            position: fixed; 
-            z-index: 1000; 
+            display: flex;
+            justify-content: center; /* Скрыто по умолчанию */
+            position: fixed;
+            z-index: 1000;
             left: 0;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgb(0,0,0); 
-            background-color: rgba(0,0,0,0.4); 
-            padding-top: 60px; 
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
         }
 
         .modal-content {
             background-color: #fefefe;
-            margin: 5% auto; 
+            margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 47%; 
+            width: 47%;
         }
 
         .close {
@@ -43,52 +43,60 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        .product-item { /* Added to ensure consistent styling */
+            margin-bottom: 20px; /* Example spacing */
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class="container">
-        <header>
-            <div class="logo">DeadLove</div>
-            <div class="content">
-                <input type="text" id="searchInput" class="search-input" placeholder="Поиск...">
-                <button id="searchButton">Поиск</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/frontend/news/news.html">Новости</a></li>
-                    <li><a href="/frontend/aboutUs/aboutUs.html">Контакты</a></li>
-                    <li><a href="#"><button id="addProductBtn">Добавить продукт</button></a></li>
-                    <li><a href="#">Адрес</a></li>
-                    <li><a href="#"><button id="open-cart">Корзина</button></a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <h1>Список продуктов</h1> 
-
-            <div id="product-list" class="product-list"></div>
-        </main>
-        <footer>
-            <p>© 2024 DeadLove. Все права защищены.</p>
-        </footer>
-    </div>
-
-
-    <!-- Модальное окно для добавления продукта -->
-    <div id="productModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Добавить новый продукт</h2>
-            <form id="productForm" enctype="multipart/form-data">
-                <input type="text" name="name" placeholder="Название продукта и описание" required><br>
-                <input type="number" step="0.01" name="price" placeholder="Цена" required><br>
-                <input type="file" name="image" accept="image/*" required><br>
-                <button type="submit">Добавить продукт</button>
-            </form>
+<div id="particles-js"></div>
+<div class="container">
+    <header>
+        <div class="logo">DeadLove</div>
+        <div class="content">
+            <input type="text" id="searchInput" class="search-input" placeholder="Поиск...">
+            <button id="searchButton">Поиск</button>
         </div>
+        <nav>
+            <ul>
+                <li><a href="/frontend/news/news.html">Новости</a></li>
+                <li><a href="/frontend/aboutUs/aboutUs.html">Контакты</a></li>
+                <li><a href="#"><button id="addProductBtn">Добавить продукт</button></a></li>
+                <select id="address-filter">
+                    <option value="">Все адреса</option>
+                </select>
+                <li><a href="#"><button id="open-cart">Корзина</button></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Список продуктов</h1>
+        <div id="product-list" class="product-list"></div>
+    </main>
+    <footer>
+        <p>© 2024 DeadLove. Все права защищены.</p>
+    </footer>
+</div>
+<!-- Модальное окно для добавления продукта -->
+<div id="productModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Добавить новый продукт</h2>
+        <form id="productForm" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Название продукта и описание" required><br>
+            <input type="number" step="0.01" name="price" placeholder="Цена" required><br>
+            <input type="file" name="image" accept="image/*" required><br>
+            <select name="address_id" id="address_id" required>
+                <option value="">Выберите адрес</option>
+            </select><br>
+            <button type="submit">Добавить продукт</button>
+        </form>
     </div>
-
+</div>
 
 <!-- Модальное окно -->
 <div id="myModal" class="modal" style="display: none;">
@@ -98,47 +106,263 @@
         <div id="cart-items"></div>
         <button id="order-button">Заказать</button>
 
-    <div id="order-form" style="display: none;">
-        <h2>Введите данные для заказа</h2>
-        <input type="text" id="name" placeholder="Имя" required>
-        <input type="text" id="address" placeholder="Адрес" required>
-        <input type="text" id="phone" placeholder="Номер телефона" required>
-        <button id="pay-button">Оплатить</button>
+        <div id="order-form" style="display: none;">
+            <h2>Введите данные для заказа</h2>
+            <input type="text" id="name" placeholder="Имя" required>
+            <input type="text" id="address" placeholder="Адрес" required>
+            <input type="text" id="phone" placeholder="Номер телефона" required>
+            <button id="pay-button">Оплатить</button>
+        </div>
     </div>
 </div>
-</div>
 
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="/frontend/js/particles.js"></script>
+<script>
+    // Function to load addresses and populate the select elements
+    async function loadAddresses() {
+        try {
+            const response = await fetch('http://localhost:3000/api/addresses');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const addresses = await response.json();
 
+            const addressSelect = document.getElementById('address_id');
+            const addressFilter = document.getElementById('address-filter');
 
+            addresses.forEach(address => {
+                const option = document.createElement('option');
+                option.value = address.id;
+                option.textContent = address.address;
+                addressSelect.appendChild(option);
 
+                const filterOption = document.createElement('option');
+                filterOption.value = address.id;
+                filterOption.textContent = address.address;
+                addressFilter.appendChild(filterOption);
+            });
+        } catch (error) {
+            console.error("Error loading addresses:", error);
+        }
+    }
 
-    <script src="/frontend/main/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="/frontend/js/particles.js"></script>
+    document.getElementById('productForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
 
-    <script>
-        // JavaScript для модального окна
-        var modal = document.getElementById("productModal");
-        var btn = document.getElementById("addProductBtn");
-        var span = document.getElementsByClassName("close")[0];
+        const formData = new FormData(this);
 
-        // Открыть модальное окно при нажатии кнопки
-        btn.onclick = function() {
-            modal.style.display = "block";
+        try {
+            const response = await fetch('http://localhost:3000/api/products', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+
+            const data = await response.json();
+            console.log('Success:', data);
+            loadProducts();
+            modal.style.display = "none"; // Закрываем модальное окно после успешного добавления
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Ошибка при добавлении продукта: ' + error.message);
+        }
+    });
+
+    let selectedProducts = [];
+    let itemCount = 0;
+
+    async function loadProducts(addressId = '') {
+        let url = 'http://localhost:3000/api/products';
+        if (addressId) {
+            url += `?address_id=${addressId}`;
         }
 
-        // Закрыть модальное окно при нажатии на (x)
-        span.onclick = function() {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const products = await response.json();
+            const productListDiv = document.getElementById('product-list');
+            productListDiv.innerHTML = '';
+
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product-item';
+                productElement.innerHTML = `
+                    <h3 style="color: white;">${product.name}</h3>
+                    <p style="color: white;">Цена: ${product.price}₽</p>
+                    <img src="/backend/img/${product.image}" alt="${product.name}" style="width: 150px; height: 170px; background-color: black; padding-bottom: 20px;">
+                    <button class="buy-button" data-name="${product.name}" data-price="${product.price}">Купить</button>
+                `;
+                productListDiv.appendChild(productElement);
+            });
+
+            const buyButtons = document.querySelectorAll('.buy-button');
+            buyButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productName = e.target.getAttribute('data-name');
+                    const productPrice = e.target.getAttribute('data-price');
+                    selectedProducts.push({ name: productName, price: productPrice });
+                    itemCount++;
+                });
+            });
+        } catch (error) {
+            console.error("Error loading products:", error);
+            document.getElementById('product-list').innerHTML = `<p>Ошибка загрузки товаров: ${error.message}</p>`;
+        }
+    }
+
+
+    loadProducts();
+    loadAddresses();
+
+    // Add event listener to the address filter
+    document.getElementById('address-filter').addEventListener('change', function () {
+        const selectedAddressId = this.value;
+        loadProducts(selectedAddressId);
+    });
+
+    document.getElementById('searchButton').addEventListener('click', async () => {
+        const searchInput = document.getElementById('searchInput').value;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({searchTerm: searchInput}),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Результаты поиска:', data.results);
+            displayProducts(data.results); // Use dedicated display function
+
+        } catch (error) {
+            console.error('Ошибка:', error);
+            document.getElementById('product-list').innerHTML = `<p>Ошибка поиска товаров: ${error.message}</p>`;
+        }
+    });
+
+    function displayProducts(products) {
+        const productListDiv = document.getElementById('product-list');
+        productListDiv.innerHTML = '';
+
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.className = 'product-item';  // Use the same class name
+            productElement.innerHTML = `
+                <h3 style="color: white;">${product.name}</h3>
+                <p style="color: white;">Цена: ${product.price}₽</p>
+                <img src="/backend/img/${product.image}" alt="${product.name}" style="width: 150px; height: 170px; background-color: black; padding-bottom: 20px;">
+                <button class="buy-button" data-name="${product.name}" data-price="${product.price}">Купить</button>
+            `;
+            productListDiv.appendChild(productElement);
+        });
+
+        const buyButtons = document.querySelectorAll('.buy-button');
+        buyButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productName = e.target.getAttribute('data-name');
+                const productPrice = e.target.getAttribute('data-price');
+                selectedProducts.push({ name: productName, price: productPrice });
+                itemCount++;
+            });
+        });
+    }
+
+
+    // Открытие модального окна при нажатии на кнопку "Корзина".
+    document.getElementById('open-cart').addEventListener('click', () => {
+        const cartItemsDiv = document.getElementById('cart-items');
+        cartItemsDiv.innerHTML = '';
+        selectedProducts.forEach(product => {
+            cartItemsDiv.innerHTML += `<p>${product.name} - ${product.price}₽</p>`;
+        });
+
+        // Восстановление кнопки "Заказать" каждый раз при открытии модального окна.
+        document.getElementById('order-button').style.display = 'block';
+        document.getElementById('order-form').style.display = 'none'; // Скрываем форму для оформления заказа.
+
+        // Показываем модальное окно.
+        document.getElementById('myModal').style.display = 'block';
+    });
+
+    // Закрытие модального окна при нажатии на элемент с классом 'close'.
+    document.querySelector('.close').onclick = function () {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    // Закрытие модального окна при нажатии на само модальное окно (если это необходимо).
+    document.getElementById('myModal').addEventListener('click', (event) => {
+        if (event.target === document.getElementById('myModal')) {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    });
+
+    // Обработчик для кнопки заказа.
+    document.getElementById('order-button').addEventListener('click', () => {
+        // Скрываем кнопку Заказа
+        document.getElementById('order-button').style.display = 'none';
+
+        // Показ формы для оформления заказа
+        document.getElementById('order-form').style.display = 'block';
+    });
+
+    // Обработчик для кнопки оплаты.
+    document.getElementById('pay-button').addEventListener('click', () => {
+        // Обработка данных из формы
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const phone = document.getElementById('phone').value;
+
+        // Здесь можно добавить код для обработки оплаты и отправки данных на сервер.
+        console.log(`Имя: ${name}, Адрес: ${address}, Телефон: ${phone}`);
+
+        // Скрываем форму после завершения платежа
+        document.getElementById('order-form').style.display = 'none';
+        document.getElementById('myModal').style.display = 'none'; // Закрываем модальное окно по завершению.
+    });
+
+
+    // JavaScript для модального окна
+    var modal = document.getElementById("productModal");
+    var btn = document.getElementById("addProductBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    // Открыть модальное окно при нажатии кнопки
+    btn.onclick = function () {
+        modal.style.display = "block";
+        // При открытии модального окна загружаем адреса
+    }
+
+    // Закрыть модальное окно при нажатии на (x)
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Закрыть модальное окно при нажатии в любом месте вне модального окна
+    window.onclick = function (event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
 
-        // Закрыть модальное окно при нажатии в любом месте вне модального окна
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        
-    </script>
+    particlesJS.load('particles-js', '/frontend/js/particles.json', function() {
+        console.log('particles.js loaded - callback');
+    });
+</script>
+<script src="/frontend/main/main.js"></script>
 </body>
 </html>
